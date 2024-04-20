@@ -45,7 +45,8 @@
   },
   "scripts": {
     "lint": "eslint ./src/**/*.mjs",
-    "lint-fix": "eslint --fix ./src/**/*.mjs"
+    "lint-fix": "eslint --fix ./src/**/*.mjs",
+    "test": "node ./bin/cli.mjs --spec ./test/openapi-3.1.json --out ./test/bin/output.pdf"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
