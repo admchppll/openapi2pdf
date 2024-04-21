@@ -2,8 +2,17 @@
 
 import Swagger from 'swagger-client';
 import converter from 'swagger2openapi';
+import { readFileSync} from 'fs'
 
-export default async function ProcessSpec(specUrl, sortTags) {
+/**
+ * 
+ * @param {string} path 
+ * @param {boolean} sortTags - Whether tags should be sorted before outputting processed spec
+ * @returns 
+ */
+export default async function processSpecFromFile(path, sortTags) {
+  const specUrl = JSON.parse(readFileSync(path, { encoding: 'utf-8' }));
+  
   let jsonParsedSpec;
   let convertedSpec;
   const convertOptions = { patch: true, warnOnly: true };

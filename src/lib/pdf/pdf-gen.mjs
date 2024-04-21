@@ -1,12 +1,11 @@
 'use strict';
 
 import pdfMake from 'pdfmake/src/printer.js';
-import { getApiDef, getApiListDef, getInfoDef, getSecurityDef } from './pdf-parts-gen.mjs';
-import ProcessSpec from './spec-parser.mjs';
+import { getApiDef, getApiListDef, getInfoDef, getSecurityDef } from './pdf-section-gen.mjs';
 
-export default function createPdf(specUrl, options) {
+export function createPdfFromSpec(parsedSpec, options) {
   return new Promise(async function (resolve) {
-    const parsedSpec = await ProcessSpec(specUrl, options.pdfSortTags);
+    
 
     const pdfStyles = {
       title: { fontSize: 32 },

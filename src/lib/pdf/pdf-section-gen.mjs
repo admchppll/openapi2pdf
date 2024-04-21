@@ -2,7 +2,7 @@
 
 import { marked } from 'marked';
 import htmlToPdfmake from 'html-to-pdfmake';
-import { rowLinesTableLayout } from './table-layouts.mjs';
+import { rowLinesTableLayout } from './pdf-table-layouts.mjs';
 import { getTypeInfo, schemaInObjectNotation, objectToTree, objectToTableTree } from './object-tree-gen.mjs';
 import { JSDOM } from 'jsdom';
 

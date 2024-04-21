@@ -1,11 +1,13 @@
 'use strict'
 
-import createPdf from './lib/pdf-gen.mjs';
-import { readFileSync, writeFileSync } from 'fs';
+import { createPdfFromSpec } from './lib/pdf/pdf-gen.mjs';
+import { writeFileSync } from 'fs';
+import processSpecFromFile from './lib/open-api/spec-parser.mjs';
 
 export async function generatePdf(argv) {
     try {
-      const data = await createPdf(JSON.parse(readFileSync(argv.spec, { encoding: 'utf-8' })), {
+      const parsedSpec = await processSpecFromFile(argv.spec, false);
+      const data = await createPdfFromSpec(parsedSpec, {
         pdfSortTags: false,
         pdfPrimaryColor: argv.primaryColor ? argv.primaryColor : '',
         // pdfAlternateColor: '',
@@ -25,7 +27,7 @@ export async function generatePdf(argv) {
           index: 'INDEX',
           api: 'API',
           apiList: 'API List',
-          apiReference: 'API Reference adam',
+          apiReference: 'API Reference',
           apiVersion: 'API Version',
           contact: 'CONTACT',
           name: 'NAME',
@@ -58,6 +60,7 @@ export async function generatePdf(argv) {
   
       writeFileSync(argv.out, data);
     } catch (e) {
+        console.error(e);
       console.error('Something went wrong! Please check your input parameters!');
     }
   }
