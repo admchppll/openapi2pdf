@@ -4,10 +4,10 @@ inputs:
   spec:
     description: 'File path to the specification file'
     required: true
-
   out:
     description: 'File path to the expected output'
     required: true
+
 outputs:
   output-file:
     description: 'The file path to the output pdf file'

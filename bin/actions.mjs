@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import * as core from '@actions/core';
+const core = require('@actions/core');
 
 import { checkDirectoryExists } from '../src/utils/filesystem.mjs';
 import { generatePdf } from '../src/main.mjs';
@@ -11,10 +11,19 @@ import { generatePdf } from '../src/main.mjs';
  * @returns {object}  The argv object required for generatePdf
  */
 function getInputs() {
- return {
-  spec: core.getInput('spec-file'),
-  out: core.getInput('out')
- }
+  const spec = core.getInput('spec-file');
+  const output = core.getInput('out');
+
+  if(!spec)
+    core.warning('spec-file param was not set');
+
+  if(!output)
+    core.warning('out param was not set')
+  
+  return {
+    spec: spec,
+    out: output
+  }
 }
 
 /**
@@ -22,8 +31,12 @@ function getInputs() {
  * @param {*} argv 
  */
 function validationGuard(argv) {
+  if(argv.out == '' || argv.spec == '')
+    throw new Error("Require arguements not set (spec-file, output")
+
   if(!checkDirectoryExists(argv.out))
     throw new Error("Output directory does not exist!");
+
 }
 
 try {
@@ -33,6 +46,6 @@ try {
   core.setOutput("output-file", argv.out);
 }
 catch(e) {
+  core.setFailed(e.message);
   console.error(e.message);
-  core.setFailed(e.message)
 }
