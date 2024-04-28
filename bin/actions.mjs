@@ -11,11 +11,11 @@ import { generatePdf } from '../src/main.mjs';
  * @returns {object}  The argv object required for generatePdf
  */
 function getInputs() {
-  const spec = core.getInput('spec-file');
+  const spec = core.getInput('spec');
   const output = core.getInput('out');
 
   if(!spec)
-    core.warning('spec-file param was not set');
+    core.warning('spec param was not set');
 
   if(!output)
     core.warning('out param was not set')
@@ -32,7 +32,7 @@ function getInputs() {
  */
 function validationGuard(argv) {
   if(argv.out == '' || argv.spec == '')
-    throw new Error("Require arguements not set (spec-file, output")
+    throw new Error("Require arguements not set (spec, output")
 
   if(!checkDirectoryExists(argv.out))
     throw new Error("Output directory does not exist!");
