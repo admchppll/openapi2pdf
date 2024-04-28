@@ -1,0 +1,16 @@
+name: 'OpenApi2Pdf'
+description: 'Created a PDF file from an OpenAPI specification file.'
+inputs:
+  spec:
+    description: 'File path to the specification file'
+    required: true
+
+  out:
+    description: 'File path to the expected output'
+    required: true
+outputs:
+  output-file:
+    description: 'The file path to the output pdf file'
+runs:
+  using: 'node20'
+  main: 'dist/index.mjs'
