@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-const core = require('@actions/core');
+import * as core from '@actions/core';
 
 import { checkDirectoryExists } from '../src/utils/filesystem.mjs';
 import { generatePdf } from '../src/main.mjs';
